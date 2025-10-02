@@ -1,25 +1,101 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js - POPRAVEN IMPORT
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { gymTheme } from './styles/Theme'; // POPRAVEN IMPORT - Theme.js
+import { AuthProvider, useAuth } from './context/AuthContext';
+
+// Import na site komponenti
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import VideoList from './pages/VideoList';
+import Users from './pages/Users';
+import Statistics from './pages/Statistics';
+import SubscriptionPlans from './pages/SubscriptionPlans';
+
+// Protected Route komponenta
+const ProtectedRoute = ({ children }) => {
+    const { isAuthenticated, loading } = useAuth();
+
+    if (loading) {
+        return <div>Вчитување...</div>;
+    }
+
+    return isAuthenticated ? children : <Navigate to="/login" />;
+};
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={gymTheme}>
+            <CssBaseline />
+            <AuthProvider>
+                <Router>
+                    <Routes>
+                        {/* Login ruta */}
+                        <Route path="/login" element={<Login />} />
+
+                        {/* Subscription Plans (javna strana) */}
+                        <Route path="/subscription-plans" element={<SubscriptionPlans />} />
+
+                        {/* Dashboard (glavna strana) */}
+                        <Route
+                            path="/"
+                            element={
+                                <ProtectedRoute>
+                                    <Dashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        {/* Admin Dashboard (lista na denovi) */}
+                        <Route
+                            path="/admin"
+                            element={
+                                <ProtectedRoute>
+                                    <AdminDashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        {/* Video List */}
+                        <Route
+                            path="/videos"
+                            element={
+                                <ProtectedRoute>
+                                    <VideoList />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        {/* Users */}
+                        <Route
+                            path="/users"
+                            element={
+                                <ProtectedRoute>
+                                    <Users />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        {/* Statistics */}
+                        <Route
+                            path="/statistics"
+                            element={
+                                <ProtectedRoute>
+                                    <Statistics />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        {/* Default redirect */}
+                        <Route path="*" element={<Navigate to="/" />} />
+                    </Routes>
+                </Router>
+            </AuthProvider>
+        </ThemeProvider>
+    );
 }
 
 export default App;
