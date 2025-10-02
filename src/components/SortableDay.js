@@ -1,4 +1,4 @@
-// src/components/SortableDay.js - POPRAVENO (so crti kako kaj video)
+// src/components/SortableDay.js - SO NOVATA SVETLA TEMA
 import React, { useState } from 'react';
 import {
     Card,
@@ -74,16 +74,14 @@ const SortableDay = ({ day, onView, onEdit, onDelete }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             sx={{
-                bgcolor: '#1a1a1a',
-                border: isHovered ? '2px solid #ffed4e' : '2px solid #ffd700',
+                border: isHovered ? '2px solid #ff4a97' : '2px solid #ff7eb9',
                 transform: isHovered ? 'scale(1.02)' : 'scale(1)',
                 transition: 'all 0.3s ease',
-                color: '#ffffff',
                 marginBottom: '16px',
                 position: 'relative',
                 cursor: 'pointer',
                 '&:hover': {
-                    boxShadow: '0 8px 25px rgba(255, 215, 0, 0.2)',
+                    boxShadow: '0 8px 25px rgba(255, 126, 185, 0.2)',
                 }
             }}
         >
@@ -102,33 +100,33 @@ const SortableDay = ({ day, onView, onEdit, onDelete }) => {
                             width: 40,
                             height: 40,
                             borderRadius: '4px',
-                            backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                            backgroundColor: 'rgba(255, 126, 185, 0.1)',
                             '&:hover': {
-                                backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                                backgroundColor: 'rgba(255, 126, 185, 0.2)',
                             },
                             flexShrink: 0
                         }}
                     >
-                        <DragHandle sx={{ color: '#ffd700' }} />
+                        <DragHandle sx={{ color: '#ff7eb9' }} />
                     </Box>
 
                     {/* Ikonka i informacii */}
                     <FitnessCenter sx={{
-                        color: '#ffd700',
+                        color: '#ff7eb9',
                         fontSize: 40,
                         flexShrink: 0
                     }} />
 
                     <Box sx={{ flex: 1 }}>
                         <Typography variant="h5" sx={{
-                            color: '#ffd700',
+                            color: '#ff7eb9',
                             mb: 1,
                             fontWeight: 'bold'
                         }}>
                             {day.title || day.name}
                         </Typography>
                         <Typography variant="body1" sx={{
-                            color: 'rgba(255,255,255,0.8)',
+                            color: '#666666',
                             mb: 1
                         }}>
                             {day.description || 'Нема опис'}
@@ -139,9 +137,9 @@ const SortableDay = ({ day, onView, onEdit, onDelete }) => {
                                 label={`${videoCount} видеа`}
                                 variant="outlined"
                                 sx={{
-                                    borderColor: '#ffd700',
-                                    color: '#ffd700',
-                                    backgroundColor: videoCount > 0 ? 'rgba(255, 215, 0, 0.15)' : 'rgba(255,255,255,0.1)',
+                                    borderColor: '#ff7eb9',
+                                    color: '#ff7eb9',
+                                    backgroundColor: videoCount > 0 ? 'rgba(255, 126, 185, 0.15)' : 'rgba(0,0,0,0.05)',
                                     fontWeight: '600'
                                 }}
                             />
@@ -154,7 +152,7 @@ const SortableDay = ({ day, onView, onEdit, onDelete }) => {
                     display: 'flex',
                     gap: 2,
                     justifyContent: 'flex-end',
-                    borderTop: '1px solid rgba(255, 215, 0, 0.3)',
+                    borderTop: '1px solid rgba(255, 126, 185, 0.3)',
                     pt: 2
                 }}>
                     <Button
@@ -162,18 +160,18 @@ const SortableDay = ({ day, onView, onEdit, onDelete }) => {
                         startIcon={<Visibility />}
                         onClick={handleView}
                         sx={{
-                            bgcolor: '#ffd700',
-                            color: '#000',
+                            bgcolor: '#ff7eb9',
+                            color: '#fff',
                             fontWeight: 'bold',
                             px: 3,
                             py: 1,
                             borderRadius: '8px',
                             '&:hover': {
-                                bgcolor: '#ffed4e',
+                                bgcolor: '#ff4a97',
                                 transform: 'translateY(-2px)',
                             },
                             transition: 'all 0.2s ease',
-                            boxShadow: '0 4px 12px rgba(255, 215, 0, 0.3)'
+                            boxShadow: '0 4px 12px rgba(255, 126, 185, 0.3)'
                         }}
                     >
                         Види Видеа
@@ -183,16 +181,16 @@ const SortableDay = ({ day, onView, onEdit, onDelete }) => {
                         startIcon={<Edit />}
                         onClick={handleEdit}
                         sx={{
-                            color: '#ffd700',
-                            borderColor: '#ffd700',
+                            color: '#a5d8ff',
+                            borderColor: '#a5d8ff',
                             borderWidth: '2px',
                             fontWeight: 'bold',
                             px: 3,
                             py: 1,
                             borderRadius: '8px',
                             '&:hover': {
-                                borderColor: '#ffed4e',
-                                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                                borderColor: '#74c0fc',
+                                backgroundColor: 'rgba(165, 216, 255, 0.1)',
                                 transform: 'translateY(-2px)',
                             },
                             transition: 'all 0.2s ease'

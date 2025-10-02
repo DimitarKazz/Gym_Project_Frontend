@@ -5,9 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a81588f-ccfb-4ef5-90a7-20a4b7034fd7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/DayList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AdminHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AdminHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DayForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DayForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DayVideoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DayVideoList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SortableDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SortableDay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SortableVideoItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SortableVideoItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/VideoForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/VideoPlayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoPlayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AdminDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/DayDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DayDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Statistics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/SubscriptionPlans.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SubscriptionPlans.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/VideoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/VideoList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/Theme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +79,8 @@
       <workItem from="1758920849775" duration="7978000" />
       <workItem from="1759075114408" duration="15509000" />
       <workItem from="1759093643036" duration="2927000" />
-      <workItem from="1759149813270" duration="36981000" />
+      <workItem from="1759149813270" duration="39722000" />
+      <workItem from="1759497832709" duration="8409000" />
     </task>
     <servers />
   </component>

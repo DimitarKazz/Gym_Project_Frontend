@@ -1,4 +1,4 @@
-// src/components/AdminHeader.js - NOVA KOMPONENTA ZA SITE STRANI
+// src/components/AdminHeader.js - SO NOVATA SVETLA TEMA
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -38,9 +38,9 @@ const AdminHeader = () => {
                 gap: 2,
                 mb: 4,
                 p: 2,
-                backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                borderRadius: '8px',
-                border: '1px solid #ffd700'
+                backgroundColor: 'rgba(255, 126, 185, 0.1)',
+                borderRadius: '12px',
+                border: '2px solid #ff7eb9'
             }}
         >
             <Button
@@ -48,12 +48,12 @@ const AdminHeader = () => {
                 startIcon={<Dashboard />}
                 onClick={handleAdminPanel}
                 sx={{
-                    color: '#ffd700',
-                    borderColor: '#ffd700',
+                    color: '#ff7eb9',
+                    borderColor: '#ff7eb9',
                     fontWeight: 'bold',
                     '&:hover': {
-                        borderColor: '#ffed4e',
-                        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                        borderColor: '#ff4a97',
+                        backgroundColor: 'rgba(255, 126, 185, 0.1)',
                     }
                 }}
             >
@@ -65,12 +65,12 @@ const AdminHeader = () => {
                 startIcon={<FitnessCenter />}
                 onClick={handleDenovi}
                 sx={{
-                    color: '#4caf50',
-                    borderColor: '#4caf50',
+                    color: '#a5d8ff',
+                    borderColor: '#a5d8ff',
                     fontWeight: 'bold',
                     '&:hover': {
-                        borderColor: '#66bb6a',
-                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderColor: '#74c0fc',
+                        backgroundColor: 'rgba(165, 216, 255, 0.1)',
                     }
                 }}
             >

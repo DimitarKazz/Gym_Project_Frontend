@@ -1,268 +1,210 @@
-// src/pages/AdminDashboard.js - SO ADMIN HEADER
-import React, { useState, useEffect } from 'react';
+// src/pages/AdminDashboard.js - SO NOVATA SVETLA TEMA
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Container, Typography, Button, Box, Dialog, Snackbar, Alert
+    Box,
+    Typography,
+    Card,
+    CardContent,
+    Grid,
+    Button
 } from '@mui/material';
-import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
-    arrayMove,
-    SortableContext,
-    verticalListSortingStrategy
-} from '@dnd-kit/sortable';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import SortableDay from '../components/SortableDay';
-import DayForm from '../components/DayForm';
-import AdminHeader from '../components/AdminHeader'; // DODADENO
-import { dayAPI } from '../services/api';
-
-const SortableDayWrapper = ({ day, onView, onEdit, onDelete }) => {
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-    } = useSortable({ id: day.id });
-
-    const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-    };
-
-    return (
-        <div ref={setNodeRef} style={style}>
-            <SortableDay
-                day={day}
-                onView={onView}
-                onEdit={onEdit}
-                onDelete={onDelete}
-            />
-        </div>
-    );
-};
+    FitnessCenter,
+    People,
+    Analytics,
+    ArrowForward
+} from '@mui/icons-material';
+import AdminHeader from '../components/AdminHeader';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
-    const [days, setDays] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [addDayDialog, setAddDayDialog] = useState(false);
-    const [selectedDay, setSelectedDay] = useState(null);
-    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
-    useEffect(() => {
-        fetchDays();
-    }, []);
-
-    const fetchDays = async () => {
-        setLoading(true);
-        try {
-            const data = await dayAPI.admin.getAll();
-            setDays(data);
-        } catch (err) {
-            console.error('Error fetching days:', err);
-            showSnackbar('Грешка при вчитување на деновите', 'error');
-            setDays([]);
-        } finally {
-            setLoading(false);
+    const dashboardItems = [
+        {
+            id: 1,
+            title: 'Денови',
+            description: 'Управувај со денови и нивните видеа',
+            icon: <FitnessCenter sx={{ fontSize: 60, color: '#ff7eb9' }} />,
+            path: '/admin',
+            color: '#ff7eb9'
+        },
+        {
+            id: 2,
+            title: 'Корисници',
+            description: 'Управувај со корисници и нивните претплати',
+            icon: <People sx={{ fontSize: 60, color: '#a5d8ff' }} />,
+            path: '/users',
+            color: '#a5d8ff'
+        },
+        {
+            id: 3,
+            title: 'Статистики',
+            description: 'Преглед на статистики и анализи',
+            icon: <Analytics sx={{ fontSize: 60, color: '#c8f0cc' }} />,
+            path: '/statistics',
+            color: '#c8f0cc'
         }
+    ];
+
+    const handleCardClick = (path) => {
+        navigate(path);
     };
-
-    const showSnackbar = (message, severity = 'success') => {
-        setSnackbar({ open: true, message, severity });
-    };
-
-    const handleDragEnd = async (event) => {
-        const { active, over } = event;
-
-        if (over && active.id !== over.id) {
-            const oldIndex = days.findIndex(d => d.id === active.id);
-            const newIndex = days.findIndex(d => d.id === over.id);
-            const newDays = arrayMove(days, oldIndex, newIndex);
-            setDays(newDays);
-
-            try {
-                const dayIds = newDays.map(day => day.id);
-                await dayAPI.admin.reorder(dayIds);
-                showSnackbar('Редоследот е успешно зачуван');
-            } catch (err) {
-                console.error('Error saving order:', err);
-                showSnackbar('Грешка при зачувување на редоследот', 'error');
-            }
-        }
-    };
-
-    const handleAddDay = () => {
-        setSelectedDay(null);
-        setAddDayDialog(true);
-    };
-
-    const handleCloseDialog = () => {
-        setAddDayDialog(false);
-        setSelectedDay(null);
-    };
-
-    const handleSaveDay = async (dayData) => {
-        try {
-            const dataToSend = {
-                title: dayData.name,
-                description: dayData.description || '',
-                orderIndex: dayData.orderIndex || 1
-            };
-
-            if (dayData.id) {
-                const updatedDay = await dayAPI.admin.update(dayData.id, dataToSend);
-                setDays(prev => prev.map(day => day.id === dayData.id ? updatedDay : day));
-                showSnackbar('Денот е успешно променет');
-            } else {
-                const newDay = await dayAPI.admin.create(dataToSend);
-                setDays(prev => [...prev, newDay]);
-                showSnackbar('Денот е успешно додаден');
-            }
-            handleCloseDialog();
-        } catch (err) {
-            console.error('Error saving day:', err);
-            showSnackbar('Грешка при зачувување на денот', 'error');
-        }
-    };
-
-    const handleDeleteDay = async (day) => {
-        if (window.confirm(`Дали сте сигурни дека сакате да го избришете денот "${day.title}"?`)) {
-            try {
-                await dayAPI.admin.delete(day.id);
-                setDays(prev => prev.filter(d => d.id !== day.id));
-                showSnackbar('Денот е успешно избришан');
-            } catch (err) {
-                console.error('Error deleting day:', err);
-                showSnackbar('Грешка при бришење на денот', 'error');
-            }
-        }
-    };
-
-    const handleEditDay = (day) => {
-        setSelectedDay(day);
-        setAddDayDialog(true);
-    };
-
-    const handleViewDay = (day) => {
-        navigate(`/videos?day=${day.id}`);
-    };
-
-    const saveOrder = async () => {
-        try {
-            const dayIds = days.map(day => day.id);
-            await dayAPI.admin.reorder(dayIds);
-            showSnackbar('Редоследот е зачуван!');
-        } catch (err) {
-            console.error('Error saving order:', err);
-            showSnackbar('Грешка при зачувување на редоследот', 'error');
-        }
-    };
-
-    if (loading) {
-        return (
-            <Container sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh' }}>
-                <Typography sx={{ color: '#ffd700' }}>Вчитување...</Typography>
-            </Container>
-        );
-    }
 
     return (
-        <>
-            <Container sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh' }}>
-                {/* DODADEN ADMIN HEADER */}
+        <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ px: 4 }}>
                 <AdminHeader />
+            </Box>
 
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                    <Typography variant="h4" sx={{ color: '#ffd700' }}>Листа на Денови</Typography>
-                    <Box>
-                        <Button
-                            variant="outlined"
-                            onClick={saveOrder}
-                            sx={{ mr: 2, color: '#ffd700', borderColor: '#ffd700' }}
-                        >
-                            Зачувај редослед
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={handleAddDay}
-                            sx={{ bgcolor: '#ffd700', color: '#000' }}
-                        >
-                            Додај ден
-                        </Button>
-                    </Box>
-                </Box>
+            {/* Header */}
+            <Box sx={{ textAlign: 'center', mb: 6, px: 4 }}>
+                <Typography variant="h3" sx={{ color: '#ff7eb9', mb: 2, fontWeight: 'bold' }}>
+                    🏋️ Админ Панел
+                </Typography>
+                <Typography variant="h6" sx={{ color: '#666666' }}>
+                    Управувај со фитнес апликацијата
+                </Typography>
+            </Box>
 
-                {days.length === 0 ? (
-                    <Box sx={{ textAlign: 'center', py: 8 }}>
-                        <Typography variant="h6" sx={{ color: '#ffd700', mb: 2 }}>
-                            Нема денови
-                        </Typography>
-                        <Typography sx={{ color: 'rgba(255,255,255,0.7)', mb: 3 }}>
-                            Додајте прв ден за да започнете
-                        </Typography>
-                        <Button
-                            variant="contained"
-                            onClick={handleAddDay}
-                            sx={{ bgcolor: '#ffd700', color: '#000' }}
-                        >
-                            Додај прв ден
-                        </Button>
-                    </Box>
-                ) : (
-                    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                        <SortableContext items={days.map(d => d.id)} strategy={verticalListSortingStrategy}>
-                            {days.map(day => (
-                                <SortableDayWrapper
-                                    key={day.id}
-                                    day={day}
-                                    onView={handleViewDay}
-                                    onEdit={handleEditDay}
-                                    onDelete={handleDeleteDay}
+            {/* AdminDashboard Grid */}
+            <Box sx={{ px: 4 }}>
+                <Grid container spacing={4} justifyContent="center">
+                    {dashboardItems.map((item) => (
+                        <Grid item xs={12} md={4} key={item.id}>
+                            <Card
+                                onClick={() => handleCardClick(item.path)}
+                                sx={{
+                                    border: `2px solid ${item.color}`,
+                                    borderRadius: '16px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease',
+                                    height: '300px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    position: 'relative',
+                                    overflow: 'hidden',
+                                    '&:hover': {
+                                        transform: 'translateY(-8px)',
+                                        boxShadow: `0 12px 35px ${item.color}40`,
+                                        '& .hover-effect': {
+                                            opacity: 1,
+                                            transform: 'scale(1)',
+                                        },
+                                        '& .action-button': {
+                                            transform: 'translateY(0)',
+                                            opacity: 1,
+                                        }
+                                    }
+                                }}
+                            >
+                                {/* Hover Background Effect */}
+                                <Box
+                                    className="hover-effect"
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        right: 0,
+                                        bottom: 0,
+                                        background: `linear-gradient(135deg, ${item.color}15 0%, transparent 50%)`,
+                                        opacity: 0,
+                                        transform: 'scale(0.8)',
+                                        transition: 'all 0.3s ease',
+                                        zIndex: 1
+                                    }}
                                 />
-                            ))}
-                        </SortableContext>
-                    </DndContext>
-                )}
 
-                <Dialog
-                    open={addDayDialog}
-                    onClose={handleCloseDialog}
-                    maxWidth="md"
-                    fullWidth
-                    PaperProps={{
-                        sx: {
-                            bgcolor: '#1a1a1a',
-                            border: '2px solid #ffd700'
-                        }
-                    }}
-                >
-                    <DayForm
-                        initialData={selectedDay}
-                        onSave={handleSaveDay}
-                        onCancel={handleCloseDialog}
-                    />
-                </Dialog>
-            </Container>
+                                <CardContent sx={{
+                                    p: 4,
+                                    flex: 1,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    textAlign: 'center',
+                                    position: 'relative',
+                                    zIndex: 2
+                                }}>
+                                    {/* Icon */}
+                                    <Box
+                                        sx={{
+                                            mb: 3,
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                                transform: 'scale(1.1)',
+                                            }
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </Box>
 
-            <Snackbar
-                open={snackbar.open}
-                autoHideDuration={3000}
-                onClose={() => setSnackbar({ ...snackbar, open: false })}
-            >
-                <Alert
-                    severity={snackbar.severity}
-                    onClose={() => setSnackbar({ ...snackbar, open: false })}
-                    sx={{
-                        bgcolor: snackbar.severity === 'error' ? '#d32f2f' :
-                            snackbar.severity === 'warning' ? '#ed6c02' : '#2e7d32'
-                    }}
-                >
-                    {snackbar.message}
-                </Alert>
-            </Snackbar>
-        </>
+                                    {/* Title */}
+                                    <Typography
+                                        variant="h4"
+                                        sx={{
+                                            color: item.color,
+                                            mb: 2,
+                                            fontWeight: 'bold',
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                                textShadow: `0 0 20px ${item.color}40`
+                                            }
+                                        }}
+                                    >
+                                        {item.title}
+                                    </Typography>
+
+                                    {/* Description */}
+                                    <Typography
+                                        variant="body1"
+                                        sx={{
+                                            color: '#666666',
+                                            mb: 3,
+                                            flex: 1,
+                                            transition: 'all 0.3s ease',
+                                        }}
+                                    >
+                                        {item.description}
+                                    </Typography>
+
+                                    {/* Action Button */}
+                                    <Button
+                                        className="action-button"
+                                        variant="contained"
+                                        endIcon={<ArrowForward />}
+                                        sx={{
+                                            bgcolor: item.color,
+                                            color: item.color === '#a5d8ff' ? '#2b2b2b' : '#fff',
+                                            fontWeight: 'bold',
+                                            px: 4,
+                                            py: 1.5,
+                                            borderRadius: '12px',
+                                            transform: 'translateY(10px)',
+                                            opacity: 0.9,
+                                            transition: 'all 0.3s ease 0.1s',
+                                            '&:hover': {
+                                                bgcolor: item.color,
+                                                transform: 'translateY(-2px)',
+                                                boxShadow: `0 6px 20px ${item.color}60`,
+                                            },
+                                        }}
+                                    >
+                                        Отвори
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
+
+            {/* Footer Info */}
+            <Box sx={{ textAlign: 'center', mt: 6, px: 4 }}>
+                <Typography variant="body2" sx={{ color: '#666666' }}>
+                    Изберете една од опциите за да продолжите
+                </Typography>
+            </Box>
+        </Box>
     );
 };
 

@@ -1,3 +1,4 @@
+// src/components/DayForm.js - SO NOVATA SVETLA TEMA
 import React, { useState } from 'react';
 import {
     Box,
@@ -52,14 +53,14 @@ const DayForm = ({ initialData, onSave, onCancel }) => {
                 elevation={3}
                 sx={{
                     p: 4,
-                    bgcolor: '#1a1a1a',
-                    border: '2px solid #ffd700',
-                    borderRadius: 3
+                    border: '2px solid #ff7eb9',
+                    borderRadius: '16px',
+                    boxShadow: '0 8px 32px rgba(255, 126, 185, 0.2)'
                 }}
             >
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                    <FitnessCenter sx={{ color: '#ffd700', mr: 2, fontSize: 32 }} />
-                    <Typography variant="h4" sx={{ color: '#ffd700' }}>
+                    <FitnessCenter sx={{ color: '#ff7eb9', mr: 2, fontSize: 32 }} />
+                    <Typography variant="h4" sx={{ color: '#ff7eb9', fontWeight: 'bold' }}>
                         {initialData ? 'Измени Ден' : 'Додади Нов Ден'}
                     </Typography>
                 </Box>
@@ -77,16 +78,6 @@ const DayForm = ({ initialData, onSave, onCancel }) => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         sx={{ mb: 3 }}
-                        InputProps={{
-                            sx: {
-                                color: 'white',
-                                bgcolor: '#2a2a2a',
-                                borderRadius: 1
-                            }
-                        }}
-                        InputLabelProps={{
-                            sx: { color: 'rgba(255,255,255,0.7)' }
-                        }}
                         error={!!error}
                         helperText={error}
                     />
@@ -99,30 +90,15 @@ const DayForm = ({ initialData, onSave, onCancel }) => {
                         multiline
                         rows={4}
                         sx={{ mb: 3 }}
-                        InputProps={{
-                            sx: {
-                                color: 'white',
-                                bgcolor: '#2a2a2a',
-                                borderRadius: 1
-                            }
-                        }}
-                        InputLabelProps={{
-                            sx: { color: 'rgba(255,255,255,0.7)' }
-                        }}
                     />
 
                     <FormControl fullWidth sx={{ mb: 4 }}>
-                        <InputLabel sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                        <InputLabel>
                             Редослед
                         </InputLabel>
                         <Select
                             value={orderIndex}
                             onChange={(e) => setOrderIndex(e.target.value)}
-                            sx={{
-                                color: 'white',
-                                bgcolor: '#2a2a2a',
-                                '& .MuiSelect-icon': { color: '#ffd700' }
-                            }}
                             label="Редослед"
                         >
                             {[1, 2, 3, 4, 5, 6, 7].map(num => (
@@ -146,11 +122,11 @@ const DayForm = ({ initialData, onSave, onCancel }) => {
                             onClick={onCancel}
                             startIcon={<Close />}
                             sx={{
-                                color: '#ffd700',
-                                borderColor: '#ffd700',
+                                color: '#ff7eb9',
+                                borderColor: '#ff7eb9',
                                 '&:hover': {
-                                    borderColor: '#ffed4e',
-                                    bgcolor: 'rgba(255, 215, 0, 0.1)'
+                                    borderColor: '#ff4a97',
+                                    backgroundColor: 'rgba(255, 126, 185, 0.1)'
                                 }
                             }}
                         >
@@ -161,10 +137,10 @@ const DayForm = ({ initialData, onSave, onCancel }) => {
                             variant="contained"
                             startIcon={<Save />}
                             sx={{
-                                bgcolor: '#ffd700',
-                                color: '#000',
+                                bgcolor: '#ff7eb9',
+                                color: '#fff',
                                 '&:hover': {
-                                    bgcolor: '#ffed4e'
+                                    bgcolor: '#ff4a97'
                                 }
                             }}
                         >

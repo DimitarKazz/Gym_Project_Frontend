@@ -8,8 +8,8 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 
 // Import na site komponenti
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import DayList from './pages/DayList';
 import VideoList from './pages/VideoList';
 import Users from './pages/Users';
 import Statistics from './pages/Statistics';
@@ -39,22 +39,22 @@ function App() {
                         {/* Subscription Plans (javna strana) */}
                         <Route path="/subscription-plans" element={<SubscriptionPlans />} />
 
-                        {/* Dashboard (glavna strana) */}
+                        {/* AdminDashboard (glavna strana) */}
                         <Route
                             path="/"
                             element={
                                 <ProtectedRoute>
-                                    <Dashboard />
+                                    <AdminDashboard />
                                 </ProtectedRoute>
                             }
                         />
 
-                        {/* Admin Dashboard (lista na denovi) */}
+                        {/* Admin AdminDashboard (lista na denovi) */}
                         <Route
                             path="/admin"
                             element={
                                 <ProtectedRoute>
-                                    <AdminDashboard />
+                                    <DayList />
                                 </ProtectedRoute>
                             }
                         />

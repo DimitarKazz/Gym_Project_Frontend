@@ -1,4 +1,4 @@
-// pages/SubscriptionPlans.js
+// pages/SubscriptionPlans.js - SO NOVATA SVETLA TEMA
 import React from 'react';
 import {
     Container,
@@ -27,7 +27,7 @@ const SubscriptionPlans = () => {
                 'Ограничен број на видеа',
                 'Поддршка преку е-маил'
             ],
-            color: 'primary.main',
+            color: '#ff7eb9',
             popular: false
         },
         {
@@ -40,7 +40,7 @@ const SubscriptionPlans = () => {
                 'Приоритетна поддршка',
                 'Напредни вежби'
             ],
-            color: 'secondary.main',
+            color: '#a5d8ff',
             popular: true
         },
         {
@@ -54,18 +54,18 @@ const SubscriptionPlans = () => {
                 'Ексклузивни видеа',
                 '24/7 поддршка'
             ],
-            color: 'warning.main',
+            color: '#c8f0cc',
             popular: false
         }
     ];
 
     return (
         <Container maxWidth="lg" sx={{ py: 4 }}>
-            <Typography variant="h2" component="h1" gutterBottom align="center" color="primary">
+            <Typography variant="h2" component="h1" gutterBottom align="center" color="#ff7eb9" fontWeight="bold">
                 🏋️‍♂️ Избери Ја Твојата Претплата
             </Typography>
 
-            <Typography variant="h6" align="center" color="text.secondary" sx={{ mb: 6 }}>
+            <Typography variant="h6" align="center" color="#666666" sx={{ mb: 6 }}>
                 Започни го твоето фитнес патување денес!
             </Typography>
 
@@ -76,7 +76,7 @@ const SubscriptionPlans = () => {
                             sx={{
                                 height: '100%',
                                 border: plan.popular ? '2px solid' : '1px solid',
-                                borderColor: plan.popular ? 'primary.main' : 'divider',
+                                borderColor: plan.popular ? plan.color : '#e0e0e0',
                                 position: 'relative',
                                 transform: plan.popular ? 'scale(1.05)' : 'scale(1)',
                                 transition: 'transform 0.2s',
@@ -92,8 +92,8 @@ const SubscriptionPlans = () => {
                                         top: -10,
                                         left: '50%',
                                         transform: 'translateX(-50%)',
-                                        backgroundColor: 'primary.main',
-                                        color: 'black',
+                                        backgroundColor: plan.color,
+                                        color: plan.color === '#a5d8ff' ? '#2b2b2b' : '#fff',
                                         px: 2,
                                         py: 0.5,
                                         borderRadius: 2,
@@ -108,15 +108,15 @@ const SubscriptionPlans = () => {
                             <CardContent sx={{ p: 3, textAlign: 'center' }}>
                                 <FitnessCenterIcon sx={{ fontSize: 40, color: plan.color, mb: 2 }} />
 
-                                <Typography variant="h4" component="h3" gutterBottom color={plan.color}>
+                                <Typography variant="h4" component="h3" gutterBottom color={plan.color} fontWeight="bold">
                                     {plan.name}
                                 </Typography>
 
-                                <Typography variant="h5" component="div" gutterBottom>
+                                <Typography variant="h5" component="div" gutterBottom fontWeight="bold">
                                     {plan.price}
                                 </Typography>
 
-                                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                                <Typography variant="body2" color="#666666" sx={{ mb: 3 }}>
                                     {plan.description}
                                 </Typography>
 
@@ -124,9 +124,9 @@ const SubscriptionPlans = () => {
                                     {plan.features.map((feature, featureIndex) => (
                                         <ListItem key={featureIndex} sx={{ px: 0 }}>
                                             <ListItemIcon sx={{ minWidth: 30 }}>
-                                                <CheckIcon sx={{ color: 'primary.main', fontSize: 20 }} />
+                                                <CheckIcon sx={{ color: plan.color, fontSize: 20 }} />
                                             </ListItemIcon>
-                                            <ListItemText primary={feature} />
+                                            <ListItemText primary={feature} sx={{ color: '#666666' }} />
                                         </ListItem>
                                     ))}
                                 </List>
@@ -137,10 +137,14 @@ const SubscriptionPlans = () => {
                                     size="large"
                                     sx={{
                                         mt: 2,
-                                        backgroundColor: plan.popular ? 'primary.main' : 'transparent',
-                                        color: plan.popular ? 'black' : 'primary.main',
+                                        backgroundColor: plan.popular ? plan.color : 'transparent',
+                                        color: plan.popular ?
+                                            (plan.color === '#a5d8ff' ? '#2b2b2b' : '#fff') :
+                                            plan.color,
+                                        borderColor: plan.color,
+                                        fontWeight: 'bold',
                                         '&:hover': {
-                                            backgroundColor: plan.popular ? 'primary.light' : 'rgba(255, 215, 0, 0.1)',
+                                            backgroundColor: plan.popular ? plan.color : `${plan.color}20`,
                                         }
                                     }}
                                     onClick={() => {
@@ -159,6 +163,7 @@ const SubscriptionPlans = () => {
                 <Button
                     variant="text"
                     size="large"
+                    sx={{ color: '#ff7eb9' }}
                     onClick={() => {
                         window.location.href = '/login';
                     }}

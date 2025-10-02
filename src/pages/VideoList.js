@@ -1,4 +1,4 @@
-// src/pages/VideoList.js - SO CELA SIRINA
+// src/pages/VideoList.js - SO NOVATA SVETLA TEMA SO KOPCE NAZAD KON DENOVI
 import React, { useState, useEffect } from 'react';
 import {
     Box,
@@ -23,6 +23,8 @@ import SortableVideoItem from '../components/SortableVideoItem';
 import AdminHeader from '../components/AdminHeader';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import AddIcon from '@mui/icons-material/Add';
+import SaveIcon from '@mui/icons-material/Save';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 const VideoList = () => {
     const [searchParams] = useSearchParams();
@@ -192,9 +194,13 @@ const VideoList = () => {
         }
     };
 
+    const handleBackToDays = () => {
+        navigate('/admin');
+    };
+
     if (selectedVideo) {
         return (
-            <Box sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
                 <Box sx={{ px: 4 }}>
                     <AdminHeader />
                 </Box>
@@ -203,7 +209,15 @@ const VideoList = () => {
                         variant="outlined"
                         onClick={() => setSelectedVideo(null)}
                         startIcon={<RefreshIcon />}
-                        sx={{ mb: 2, color: '#ffd700', borderColor: '#ffd700' }}
+                        sx={{
+                            mb: 2,
+                            color: '#ff7eb9',
+                            borderColor: '#ff7eb9',
+                            '&:hover': {
+                                borderColor: '#ff4a97',
+                                backgroundColor: 'rgba(255, 126, 185, 0.1)',
+                            }
+                        }}
                     >
                         Назад кон видеата
                     </Button>
@@ -215,13 +229,13 @@ const VideoList = () => {
 
     if (loading) {
         return (
-            <Box sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
                 <Box sx={{ px: 4 }}>
                     <AdminHeader />
                 </Box>
                 <Box sx={{ px: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
-                    <CircularProgress sx={{ color: '#ffd700' }} />
-                    <Typography sx={{ color: '#ffd700', ml: 2 }}>
+                    <CircularProgress sx={{ color: '#ff7eb9' }} />
+                    <Typography sx={{ color: '#ff7eb9', ml: 2 }}>
                         Вчитување на видеа...
                     </Typography>
                 </Box>
@@ -231,7 +245,7 @@ const VideoList = () => {
 
     if (error) {
         return (
-            <Box sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
                 <Box sx={{ px: 4 }}>
                     <AdminHeader />
                 </Box>
@@ -258,7 +272,7 @@ const VideoList = () => {
 
     return (
         <>
-            <Box sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
                 <Box sx={{ px: 4 }}>
                     <AdminHeader />
                 </Box>
@@ -267,28 +281,54 @@ const VideoList = () => {
                     {/* Header so kopcinja */}
                     <Box sx={{ mb: 4 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                            <Typography
-                                variant="h3"
-                                sx={{ color: '#ffd700', fontWeight: 'bold' }}
-                            >
-                                🎬 Фитнес Видеа
-                                {day && (
-                                    <Typography variant="h5" sx={{ color: '#ffed4e', mt: 1 }}>
-                                        Ден: {day.title}
-                                    </Typography>
-                                )}
-                            </Typography>
+                            {/* Left side - Back to Days button and Title */}
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <Button
+                                    variant="outlined"
+                                    startIcon={<FitnessCenterIcon />}
+                                    onClick={handleBackToDays}
+                                    sx={{
+                                        color: '#a5d8ff',
+                                        borderColor: '#a5d8ff',
+                                        fontWeight: 'bold',
+                                        px: 3,
+                                        py: 1,
+                                        '&:hover': {
+                                            borderColor: '#74c0fc',
+                                            backgroundColor: 'rgba(165, 216, 255, 0.1)',
+                                        }
+                                    }}
+                                >
+                                    Назад кон Денови
+                                </Button>
 
+                                <Box>
+                                    <Typography
+                                        variant="h3"
+                                        sx={{ color: '#ff7eb9', fontWeight: 'bold' }}
+                                    >
+                                        🎬 Фитнес Видеа
+                                    </Typography>
+                                    {day && (
+                                        <Typography variant="h5" sx={{ color: '#ff4a97', mt: 1 }}>
+                                            Ден: {day.title}
+                                        </Typography>
+                                    )}
+                                </Box>
+                            </Box>
+
+                            {/* Right side - Action buttons */}
                             <Box sx={{ display: 'flex', gap: 2 }}>
                                 <Button
                                     variant="outlined"
                                     onClick={saveVideoOrder}
+                                    startIcon={<SaveIcon />}
                                     sx={{
-                                        color: '#ffd700',
-                                        borderColor: '#ffd700',
+                                        color: '#a5d8ff',
+                                        borderColor: '#a5d8ff',
                                         '&:hover': {
-                                            borderColor: '#ffed4e',
-                                            backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                                            borderColor: '#74c0fc',
+                                            backgroundColor: 'rgba(165, 216, 255, 0.1)',
                                         }
                                     }}
                                 >
@@ -299,12 +339,12 @@ const VideoList = () => {
                                     startIcon={<AddIcon />}
                                     onClick={handleOpenAddVideo}
                                     sx={{
-                                        bgcolor: '#ffd700',
-                                        color: '#000',
+                                        bgcolor: '#ff7eb9',
+                                        color: '#fff',
                                         fontWeight: 'bold',
                                         px: 3,
                                         '&:hover': {
-                                            bgcolor: '#ffed4e',
+                                            bgcolor: '#ff4a97',
                                             transform: 'translateY(-2px)',
                                         },
                                         transition: 'all 0.2s ease'
@@ -318,46 +358,80 @@ const VideoList = () => {
 
                     {!videos.length ? (
                         <Box sx={{ textAlign: 'center', py: 8 }}>
-                            <Typography variant="h6" sx={{ color: '#ffd700', mb: 2 }}>
+                            <Typography variant="h6" sx={{ color: '#ff7eb9', mb: 2 }}>
                                 {dayId ? 'Нема видеа во овој ден' : 'Нема видеа во моментов'}
                             </Typography>
-                            <Typography sx={{ color: 'rgba(255,255,255,0.7)', mb: 3 }}>
+                            <Typography sx={{ color: '#666666', mb: 3 }}>
                                 Користете го "Додади Видео" за да додадете прво видео
                             </Typography>
-                            <Button
-                                variant="contained"
-                                onClick={handleOpenAddVideo}
-                                startIcon={<AddIcon />}
-                                sx={{
-                                    bgcolor: '#ffd700',
-                                    color: '#000',
-                                    '&:hover': {
-                                        bgcolor: '#ffed4e',
-                                        transform: 'translateY(-2px)',
-                                    }
-                                }}
-                            >
-                                Додади Видео
-                            </Button>
+                            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
+                                <Button
+                                    variant="contained"
+                                    onClick={handleOpenAddVideo}
+                                    startIcon={<AddIcon />}
+                                    sx={{
+                                        bgcolor: '#ff7eb9',
+                                        color: '#fff',
+                                        '&:hover': {
+                                            bgcolor: '#ff4a97',
+                                            transform: 'translateY(-2px)',
+                                        }
+                                    }}
+                                >
+                                    Додади Видео
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    onClick={handleBackToDays}
+                                    startIcon={<FitnessCenterIcon />}
+                                    sx={{
+                                        color: '#a5d8ff',
+                                        borderColor: '#a5d8ff',
+                                        '&:hover': {
+                                            borderColor: '#74c0fc',
+                                            backgroundColor: 'rgba(165, 216, 255, 0.1)',
+                                        }
+                                    }}
+                                >
+                                    Назад кон Денови
+                                </Button>
+                            </Box>
                         </Box>
                     ) : (
                         <Box>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-                                <Typography variant="h5" sx={{ color: '#ffd700' }}>
+                                <Typography variant="h5" sx={{ color: '#ff7eb9', fontWeight: 'bold' }}>
                                     {dayId ? `Видеа за денот (${videos.length})` : `Сите видеа (${videos.length})`}
                                 </Typography>
-                                <Button
-                                    startIcon={<RefreshIcon />}
-                                    onClick={fetchVideos}
-                                    sx={{
-                                        color: '#ffd700',
-                                        '&:hover': {
-                                            backgroundColor: 'rgba(255, 215, 0, 0.1)',
-                                        }
-                                    }}
-                                >
-                                    Освежи
-                                </Button>
+                                <Box sx={{ display: 'flex', gap: 2 }}>
+                                    <Button
+                                        startIcon={<RefreshIcon />}
+                                        onClick={fetchVideos}
+                                        sx={{
+                                            color: '#a5d8ff',
+                                            '&:hover': {
+                                                backgroundColor: 'rgba(165, 216, 255, 0.1)',
+                                            }
+                                        }}
+                                    >
+                                        Освежи
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        onClick={handleBackToDays}
+                                        startIcon={<FitnessCenterIcon />}
+                                        sx={{
+                                            color: '#a5d8ff',
+                                            borderColor: '#a5d8ff',
+                                            '&:hover': {
+                                                borderColor: '#74c0fc',
+                                                backgroundColor: 'rgba(165, 216, 255, 0.1)',
+                                            }
+                                        }}
+                                    >
+                                        Кон Денови
+                                    </Button>
+                                </Box>
                             </Box>
 
                             {/* Drag & Drop Video List */}
@@ -375,6 +449,27 @@ const VideoList = () => {
                                     ))}
                                 </SortableContext>
                             </DndContext>
+
+                            {/* Bottom Back to Days button */}
+                            <Box sx={{ textAlign: 'center', mt: 4 }}>
+                                <Button
+                                    variant="contained"
+                                    onClick={handleBackToDays}
+                                    startIcon={<FitnessCenterIcon />}
+                                    sx={{
+                                        bgcolor: '#a5d8ff',
+                                        color: '#2b2b2b',
+                                        fontWeight: 'bold',
+                                        px: 4,
+                                        py: 1.5,
+                                        '&:hover': {
+                                            bgcolor: '#74c0fc',
+                                        }
+                                    }}
+                                >
+                                    Назад кон Листа на Денови
+                                </Button>
+                            </Box>
                         </Box>
                     )}
                 </Box>
@@ -388,9 +483,8 @@ const VideoList = () => {
                 fullWidth
                 PaperProps={{
                     sx: {
-                        bgcolor: '#1a1a1a',
-                        border: '2px solid #ffd700',
-                        borderRadius: '12px'
+                        borderRadius: '16px',
+                        boxShadow: '0 8px 32px rgba(255, 126, 185, 0.2)'
                     }
                 }}
             >
@@ -410,10 +504,6 @@ const VideoList = () => {
                 <Alert
                     severity={snackbar.severity}
                     onClose={() => setSnackbar({ ...snackbar, open: false })}
-                    sx={{
-                        bgcolor: snackbar.severity === 'error' ? '#d32f2f' :
-                            snackbar.severity === 'warning' ? '#ed6c02' : '#2e7d32'
-                    }}
                 >
                     {snackbar.message}
                 </Alert>

@@ -1,4 +1,4 @@
-// src/components/SortableVideoItem.js - NOVA KOMPONENTA ZA DRAG & DROP VIDEO
+// src/components/SortableVideoItem.js - SO NOVATA SVETLA TEMA
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -34,10 +34,10 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                     sx={{
                         width: 120,
                         height: 80,
-                        backgroundColor: '#2a2a2a',
+                        backgroundColor: '#f5f5f5',
                         borderRadius: '8px',
                         overflow: 'hidden',
-                        border: '2px solid #ffd700',
+                        border: '2px solid #ff7eb9',
                         flexShrink: 0,
                         backgroundImage: `url(${video.thumbnailUrl})`,
                         backgroundSize: 'cover',
@@ -47,7 +47,7 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                         justifyContent: 'center'
                     }}
                 >
-                    <PlayArrowIcon sx={{ color: '#ffd700', fontSize: 32, opacity: 0.8 }} />
+                    <PlayArrowIcon sx={{ color: '#ff7eb9', fontSize: 32, opacity: 0.8 }} />
                 </Box>
             );
         }
@@ -58,12 +58,12 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                 sx={{
                     width: 120,
                     height: 80,
-                    backgroundColor: '#2a2a2a',
+                    backgroundColor: '#f5f5f5',
                     borderRadius: '8px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: '2px solid #ffd700',
+                    border: '2px solid #ff7eb9',
                     flexShrink: 0,
                     position: 'relative',
                     overflow: 'hidden'
@@ -75,11 +75,11 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'linear-gradient(135deg, #ffd700 0%, #ff6b00 100%)',
+                    background: 'linear-gradient(135deg, #ff7eb9 0%, #a5d8ff 100%)',
                     opacity: 0.3
                 }} />
                 <PlayArrowIcon sx={{
-                    color: '#ffd700',
+                    color: '#ff7eb9',
                     fontSize: 32,
                     position: 'relative',
                     zIndex: 1
@@ -93,14 +93,13 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
             ref={setNodeRef}
             style={style}
             sx={{
-                bgcolor: '#1a1a1a',
-                border: '2px solid #ffd700',
+                border: '2px solid #ff7eb9',
                 borderRadius: '12px',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 8px 25px rgba(255, 215, 0, 0.2)',
-                    border: '2px solid #ffed4e'
+                    boxShadow: '0 8px 25px rgba(255, 126, 185, 0.2)',
+                    border: '2px solid #ff4a97'
                 },
                 mb: 2
             }}
@@ -121,13 +120,13 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                                 width: 40,
                                 height: 40,
                                 borderRadius: '4px',
-                                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                                backgroundColor: 'rgba(255, 126, 185, 0.1)',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                                    backgroundColor: 'rgba(255, 126, 185, 0.2)',
                                 }
                             }}
                         >
-                            <DragHandleIcon sx={{ color: '#ffd700' }} />
+                            <DragHandleIcon sx={{ color: '#ff7eb9' }} />
                         </Box>
 
                         {/* Preview slichka */}
@@ -135,14 +134,14 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
 
                         <Box sx={{ flex: 1 }}>
                             <Typography variant="h5" sx={{
-                                color: '#ffd700',
+                                color: '#ff7eb9',
                                 mb: 1,
                                 fontWeight: 'bold'
                             }}>
                                 {index + 1}. {video.title}
                             </Typography>
                             <Typography variant="body1" sx={{
-                                color: 'rgba(255,255,255,0.8)',
+                                color: '#666666',
                                 mb: 1
                             }}>
                                 {video.description || 'Нема опис'}
@@ -150,7 +149,7 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap', mt: 1 }}>
                                 {video.day && (
                                     <Typography variant="caption" sx={{
-                                        color: 'rgba(255,255,255,0.6)',
+                                        color: '#999999',
                                         fontStyle: 'italic'
                                     }}>
                                         Ден: {video.day.title}
@@ -165,10 +164,10 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                         <IconButton
                             onClick={() => onPlay(video)}
                             sx={{
-                                color: '#ffd700',
-                                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                                color: '#ff7eb9',
+                                backgroundColor: 'rgba(255, 126, 185, 0.1)',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                                    backgroundColor: 'rgba(255, 126, 185, 0.2)',
                                 }
                             }}
                             title="Пушти видео"
@@ -178,10 +177,10 @@ const SortableVideoItem = ({ video, index, onPlay, onEdit, onDelete }) => {
                         <IconButton
                             onClick={() => onEdit(video)}
                             sx={{
-                                color: '#ffd700',
-                                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                                color: '#a5d8ff',
+                                backgroundColor: 'rgba(165, 216, 255, 0.1)',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                                    backgroundColor: 'rgba(165, 216, 255, 0.2)',
                                 }
                             }}
                             title="Измени видео"

@@ -1,4 +1,4 @@
-// src/components/VideoForm.js
+// src/components/VideoForm.js - SO NOVATA SVETLA TEMA
 import React, { useState } from 'react';
 import {
     DialogTitle,
@@ -74,8 +74,8 @@ const VideoForm = ({ initialData = null, onSave, onCancel, dayId = null }) => {
 
     return (
         <>
-            <DialogTitle sx={{ color: '#ffd700', borderBottom: '1px solid #ffd700' }}>
-                <Typography variant="h5">
+            <DialogTitle sx={{ color: '#ff7eb9', borderBottom: '1px solid #ff7eb9' }}>
+                <Typography variant="h5" fontWeight="bold">
                     {initialData ? 'Измени Видео' : 'Додади Ново Видео'}
                 </Typography>
             </DialogTitle>
@@ -95,12 +95,6 @@ const VideoForm = ({ initialData = null, onSave, onCancel, dayId = null }) => {
                         onChange={(e) => setTitle(e.target.value)}
                         required
                         sx={{ mb: 2 }}
-                        InputProps={{
-                            sx: { color: 'white', bgcolor: '#2a2a2a' }
-                        }}
-                        InputLabelProps={{
-                            sx: { color: 'rgba(255,255,255,0.7)' }
-                        }}
                     />
 
                     {/* File upload section */}
@@ -110,12 +104,12 @@ const VideoForm = ({ initialData = null, onSave, onCancel, dayId = null }) => {
                             component="label"
                             startIcon={<CloudUpload />}
                             sx={{
-                                color: '#ffd700',
-                                borderColor: '#ffd700',
+                                color: '#ff7eb9',
+                                borderColor: '#ff7eb9',
                                 mb: 1,
                                 '&:hover': {
-                                    borderColor: '#ffed4e',
-                                    backgroundColor: 'rgba(255, 215, 0, 0.1)'
+                                    borderColor: '#ff4a97',
+                                    backgroundColor: 'rgba(255, 126, 185, 0.1)'
                                 }
                             }}
                         >
@@ -129,18 +123,18 @@ const VideoForm = ({ initialData = null, onSave, onCancel, dayId = null }) => {
                         </Button>
 
                         {videoFile && (
-                            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                            <Typography variant="body2" sx={{ color: '#666666' }}>
                                 ✅ Избран фајл: {videoFile.name} ({(videoFile.size / (1024 * 1024)).toFixed(2)} MB)
                             </Typography>
                         )}
 
                         {initialData && !videoFile && (
-                            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                            <Typography variant="body2" sx={{ color: '#666666' }}>
                                 📹 Постоечко видео: {initialData.fileName || initialData.title}
                             </Typography>
                         )}
 
-                        <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', mt: 1 }}>
+                        <Typography variant="caption" sx={{ color: '#999999', display: 'block', mt: 1 }}>
                             Поддржани формати: MP4, AVI, MOV, WMV (макс. 100MB)
                         </Typography>
                     </Box>
@@ -153,24 +147,18 @@ const VideoForm = ({ initialData = null, onSave, onCancel, dayId = null }) => {
                         multiline
                         rows={3}
                         sx={{ mb: 2 }}
-                        InputProps={{
-                            sx: { color: 'white', bgcolor: '#2a2a2a' }
-                        }}
-                        InputLabelProps={{
-                            sx: { color: 'rgba(255,255,255,0.7)' }
-                        }}
                         placeholder="Опишете го видеото..."
                     />
                 </form>
             </DialogContent>
 
-            <DialogActions sx={{ p: 3, borderTop: '1px solid rgba(255, 215, 0, 0.3)' }}>
+            <DialogActions sx={{ p: 3, borderTop: '1px solid rgba(255, 126, 185, 0.3)' }}>
                 <Button
                     onClick={handleClose}
                     startIcon={<Close />}
                     sx={{
-                        color: '#ffd700',
-                        borderColor: '#ffd700',
+                        color: '#ff7eb9',
+                        borderColor: '#ff7eb9',
                     }}
                     disabled={loading}
                 >
@@ -182,14 +170,14 @@ const VideoForm = ({ initialData = null, onSave, onCancel, dayId = null }) => {
                     startIcon={loading ? <CircularProgress size={20} /> : <Save />}
                     disabled={loading || !title.trim() || (!videoFile && !initialData)}
                     sx={{
-                        bgcolor: '#ffd700',
-                        color: '#000',
+                        bgcolor: '#ff7eb9',
+                        color: '#fff',
                         '&:hover': {
-                            bgcolor: '#ffed4e'
+                            bgcolor: '#ff4a97'
                         },
                         '&:disabled': {
-                            bgcolor: 'rgba(255, 215, 0, 0.3)',
-                            color: 'rgba(0, 0, 0, 0.5)'
+                            bgcolor: 'rgba(255, 126, 185, 0.3)',
+                            color: 'rgba(255, 255, 255, 0.5)'
                         }
                     }}
                 >

@@ -1,4 +1,4 @@
-// src/components/VideoPlayer.js - SAMO LOKALNI VIDEO
+// src/components/VideoPlayer.js - SO NOVATA SVETLA TEMA
 import React from 'react';
 import { Box, Paper, Typography, CircularProgress, Alert } from '@mui/material';
 
@@ -37,13 +37,13 @@ const VideoPlayer = ({ video }) => {
     };
 
     return (
-        <Paper elevation={3} sx={{ p: 3, mb: 2, bgcolor: '#1a1a1a', border: '2px solid #ffd700' }}>
-            <Typography variant="h4" gutterBottom sx={{ color: '#ffd700', textAlign: 'center' }}>
+        <Paper elevation={3} sx={{ p: 3, mb: 2, border: '2px solid #ff7eb9', borderRadius: '16px' }}>
+            <Typography variant="h4" gutterBottom sx={{ color: '#ff7eb9', textAlign: 'center', fontWeight: 'bold' }}>
                 {video?.title || 'Видео'}
             </Typography>
 
             {video?.description && (
-                <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', mb: 3, textAlign: 'center' }}>
+                <Typography variant="body1" sx={{ color: '#666666', mb: 3, textAlign: 'center' }}>
                     {video.description}
                 </Typography>
             )}
@@ -51,10 +51,11 @@ const VideoPlayer = ({ video }) => {
             <Box sx={{
                 width: '100%',
                 height: { xs: 300, md: 500 },
-                backgroundColor: '#000',
+                backgroundColor: '#f5f5f5',
                 borderRadius: 2,
                 overflow: 'hidden',
-                position: 'relative'
+                position: 'relative',
+                border: '1px solid #e0e0e0'
             }}>
                 {loading && (
                     <Box sx={{
@@ -66,10 +67,10 @@ const VideoPlayer = ({ video }) => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: '#000'
+                        backgroundColor: '#f5f5f5'
                     }}>
-                        <CircularProgress sx={{ color: '#ffd700' }} />
-                        <Typography sx={{ color: '#ffd700', ml: 2 }}>
+                        <CircularProgress sx={{ color: '#ff7eb9' }} />
+                        <Typography sx={{ color: '#ff7eb9', ml: 2 }}>
                             Вчитување на видео...
                         </Typography>
                     </Box>
@@ -85,7 +86,7 @@ const VideoPlayer = ({ video }) => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: '#000'
+                        backgroundColor: '#f5f5f5'
                     }}>
                         <Alert severity="error" sx={{ width: '80%' }}>
                             {error}
@@ -113,7 +114,7 @@ const VideoPlayer = ({ video }) => {
                         Вашиот прелистувач не поддржува видео елемент.
                     </video>
                 ) : (
-                    <Box display="flex" alignItems="center" justifyContent="center" height="100%" color="white">
+                    <Box display="flex" alignItems="center" justifyContent="center" height="100%" color="#666666">
                         <Alert severity="warning">
                             Видеото не е достапно
                         </Alert>
@@ -122,17 +123,17 @@ const VideoPlayer = ({ video }) => {
             </Box>
 
             <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                <Typography variant="body2" sx={{ color: '#666666' }}>
                     📹 Локално Видео
                 </Typography>
 
                 {video?.fileName && (
-                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)' }}>
+                    <Typography variant="caption" sx={{ color: '#999999' }}>
                         Фајл: {video.fileName}
                     </Typography>
                 )}
 
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                <Typography variant="body2" sx={{ color: '#666666' }}>
                     {video?.day ? `Ден ${video.day.orderIndex}` : 'Сите денови'}
                 </Typography>
             </Box>

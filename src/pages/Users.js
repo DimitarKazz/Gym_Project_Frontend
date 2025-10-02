@@ -1,4 +1,4 @@
-// src/pages/Users.js - SO ADMIN HEADER
+// src/pages/Users.js - SO NOVATA SVETLA TEMA
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -10,46 +10,47 @@ import {
     CardContent
 } from '@mui/material';
 import { People } from '@mui/icons-material';
-import AdminHeader from '../components/AdminHeader'; // DODADENO
+import AdminHeader from '../components/AdminHeader';
 
 const Users = () => {
     const navigate = useNavigate();
 
     return (
-        <Container sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh' }}>
-            {/* ADMIN HEADER - PRVO VO KONTEJNEROT */}
+        <Container sx={{ py: 4, minHeight: '100vh' }}>
             <AdminHeader />
 
-            {/* Potoa ostanatiot kod */}
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-                <People sx={{ color: '#4caf50', fontSize: 40, mr: 2 }} />
+                <People sx={{ color: '#a5d8ff', fontSize: 40, mr: 2 }} />
                 <Box>
-                    <Typography variant="h4" sx={{ color: '#4caf50', mb: 1 }}>
-                        Корисници
+                    <Typography variant="h4" sx={{ color: '#a5d8ff', mb: 1, fontWeight: 'bold' }}>
+                        👥 Корисници
                     </Typography>
-                    <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                    <Typography variant="body1" sx={{ color: '#666666' }}>
                         Управувај со корисници и нивните претплати
                     </Typography>
                 </Box>
             </Box>
 
             {/* Placeholder Content */}
-            <Card sx={{ bgcolor: '#1a1a1a', border: '2px solid #4caf50', p: 4, textAlign: 'center' }}>
+            <Card sx={{ border: '2px solid #a5d8ff', p: 4, textAlign: 'center' }}>
                 <CardContent>
-                    <Typography variant="h5" sx={{ color: '#4caf50', mb: 3 }}>
-                        🚧 Во развој
+                    <Typography variant="h5" sx={{ color: '#a5d8ff', mb: 3, fontWeight: 'bold' }}>
+                        👥 Во развој
                     </Typography>
-                    <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', mb: 3 }}>
+                    <Typography variant="body1" sx={{ color: '#666666', mb: 3 }}>
                         Оваа функција моментално е во развој и ќе биде достапна наскоро.
                     </Typography>
                     <Button
                         variant="contained"
                         onClick={() => navigate('/')}
                         sx={{
-                            bgcolor: '#4caf50',
-                            color: '#000',
+                            bgcolor: '#a5d8ff',
+                            color: '#2b2b2b',
                             fontWeight: 'bold',
-                            px: 4
+                            px: 4,
+                            '&:hover': {
+                                bgcolor: '#74c0fc',
+                            }
                         }}
                     >
                         Назад кон Dashboard

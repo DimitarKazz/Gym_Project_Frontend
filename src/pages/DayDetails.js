@@ -1,4 +1,4 @@
-// src/pages/DayDetails.js - SO CELA SIRINA
+// src/pages/DayDetails.js - SO CELA SIRINA BEZ BELI PRAVOAGOLNICI
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
@@ -81,12 +81,12 @@ const DayDetails = () => {
 
     if (loading) {
         return (
-            <Box sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh', width: '100%' }}>
-                <Box sx={{ px: 4 }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
+                <Box sx={{ px: 0 }}>
                     <AdminHeader />
                 </Box>
-                <Box sx={{ px: 4 }}>
-                    <Typography sx={{ color: '#ffd700' }}>Вчитување...</Typography>
+                <Box sx={{ px: 0 }}>
+                    <Typography sx={{ color: '#ff7eb9' }}>Вчитување...</Typography>
                 </Box>
             </Box>
         );
@@ -94,16 +94,23 @@ const DayDetails = () => {
 
     if (!day) {
         return (
-            <Box sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh', width: '100%' }}>
-                <Box sx={{ px: 4 }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
+                <Box sx={{ px: 0 }}>
                     <AdminHeader />
                 </Box>
-                <Box sx={{ px: 4 }}>
-                    <Typography sx={{ color: '#ffd700', mb: 2 }}>Денот не е пронајден</Typography>
+                <Box sx={{ px: 0 }}>
+                    <Typography sx={{ color: '#ff7eb9', mb: 2 }}>Денот не е пронајден</Typography>
                     <Button
                         onClick={handleBack}
                         variant="outlined"
-                        sx={{ color: '#ffd700', borderColor: '#ffd700' }}
+                        sx={{
+                            color: '#ff7eb9',
+                            borderColor: '#ff7eb9',
+                            '&:hover': {
+                                borderColor: '#ff4a97',
+                                backgroundColor: 'rgba(255, 126, 185, 0.1)',
+                            }
+                        }}
                     >
                         Назад кон админ панел
                     </Button>
@@ -113,22 +120,31 @@ const DayDetails = () => {
     }
 
     return (
-        <Box sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh', width: '100%' }}>
-            <Box sx={{ px: 4 }}>
+        <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ px: 0 }}>
                 <AdminHeader />
             </Box>
 
-            <Box sx={{ px: 4 }}>
+            <Box sx={{ px: 0 }}>
                 {/* Header */}
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-                    <IconButton onClick={handleBack} sx={{ color: '#ffd700', mr: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, px: 4 }}>
+                    <IconButton
+                        onClick={handleBack}
+                        sx={{
+                            color: '#ff7eb9',
+                            mr: 2,
+                            '&:hover': {
+                                backgroundColor: 'rgba(255, 126, 185, 0.1)',
+                            }
+                        }}
+                    >
                         <ArrowBack />
                     </IconButton>
                     <Box sx={{ flex: 1 }}>
-                        <Typography variant="h4" sx={{ color: '#ffd700', mb: 1 }}>
+                        <Typography variant="h4" sx={{ color: '#ff7eb9', mb: 1, fontWeight: 'bold' }}>
                             {day.title || day.name}
                         </Typography>
-                        <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                        <Typography variant="body1" sx={{ color: '#666666' }}>
                             {day.description || 'Без опис'}
                         </Typography>
                     </Box>
@@ -136,52 +152,71 @@ const DayDetails = () => {
 
                 {/* Video List */}
                 {!day.videos || day.videos.length === 0 ? (
-                    <Box sx={{ textAlign: 'center', py: 8 }}>
-                        <Typography variant="h6" sx={{ color: '#ffd700', mb: 2 }}>
+                    <Box sx={{ textAlign: 'center', py: 8, px: 4 }}>
+                        <Typography variant="h6" sx={{ color: '#ff7eb9', mb: 2, fontWeight: 'bold' }}>
                             Нема видеа во овој ден
                         </Typography>
-                        <Typography sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                        <Typography sx={{ color: '#666666' }}>
                             Додадете видеа преку админ панелот
                         </Typography>
                     </Box>
                 ) : (
                     <Box>
-                        <Typography variant="h5" sx={{ color: '#ffd700', mb: 3 }}>
-                            Видеа ({day.videos.length})
+                        <Typography variant="h5" sx={{ color: '#ff7eb9', mb: 3, fontWeight: 'bold', px: 4 }}>
+                            🎬 Видеа ({day.videos.length})
                         </Typography>
                         {day.videos.map((video, index) => (
-                            <Card key={video.id} sx={{ mb: 3, bgcolor: '#1a1a1a', border: '1px solid #ffd700' }}>
-                                <CardContent sx={{ p: 3 }}>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                                        <Typography variant="h6" sx={{ color: '#ffd700' }}>
-                                            {index + 1}. {video.title}
-                                        </Typography>
-                                        <Box sx={{ display: 'flex', gap: 1 }}>
-                                            <IconButton
-                                                onClick={() => handleEditVideo(video)}
-                                                sx={{ color: '#ffd700' }}
-                                            >
-                                                <Edit />
-                                            </IconButton>
-                                            <IconButton
-                                                onClick={() => handleDeleteVideo(video.id)}
-                                                sx={{ color: '#ff6b6b' }}
-                                            >
-                                                <Delete />
-                                            </IconButton>
+                            <Box key={video.id} sx={{ mb: 3 }}>
+                                {/* Video Container - CELA SIRINA BEZ PADDING */}
+                                <Box sx={{
+                                    width: '100%',
+                                    backgroundColor: '#f5f5f5',
+                                    borderTop: '2px solid #ff7eb9',
+                                    borderBottom: '2px solid #ff7eb9',
+                                    py: 3
+                                }}>
+                                    {/* Video Info - SO PADDING */}
+                                    <Box sx={{ px: 4, mb: 2 }}>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                            <Typography variant="h6" sx={{ color: '#ff7eb9', fontWeight: 'bold' }}>
+                                                {index + 1}. {video.title}
+                                            </Typography>
+                                            <Box sx={{ display: 'flex', gap: 1 }}>
+                                                <IconButton
+                                                    onClick={() => handleEditVideo(video)}
+                                                    sx={{
+                                                        color: '#a5d8ff',
+                                                        '&:hover': {
+                                                            backgroundColor: 'rgba(165, 216, 255, 0.1)',
+                                                        }
+                                                    }}
+                                                >
+                                                    <Edit />
+                                                </IconButton>
+                                                <IconButton
+                                                    onClick={() => handleDeleteVideo(video.id)}
+                                                    sx={{
+                                                        color: '#ff6b6b',
+                                                        '&:hover': {
+                                                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                                                        }
+                                                    }}
+                                                >
+                                                    <Delete />
+                                                </IconButton>
+                                            </Box>
                                         </Box>
                                     </Box>
 
-                                    {/* Video Player */}
-                                    <Box sx={{ mt: 2 }}>
+                                    {/* Video Player - CELA SIRINA BEZ PADDING */}
+                                    <Box>
                                         {video.url ? (
                                             <video
                                                 controls
                                                 style={{
                                                     width: '100%',
-                                                    maxWidth: '600px',
-                                                    borderRadius: '8px',
-                                                    backgroundColor: '#000'
+                                                    height: 'auto',
+                                                    display: 'block'
                                                 }}
                                             >
                                                 <source src={video.url} type="video/mp4" />
@@ -190,21 +225,19 @@ const DayDetails = () => {
                                         ) : (
                                             <Box sx={{
                                                 width: '100%',
-                                                maxWidth: '600px',
-                                                height: '200px',
-                                                backgroundColor: '#000',
-                                                borderRadius: '8px',
+                                                height: '300px',
+                                                backgroundColor: '#e0e0e0',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
-                                                color: '#ffd700'
+                                                color: '#ff7eb9',
                                             }}>
-                                                <Typography>Видеото нема URL</Typography>
+                                                <Typography variant="h6">Видеото нема URL</Typography>
                                             </Box>
                                         )}
                                     </Box>
-                                </CardContent>
-                            </Card>
+                                </Box>
+                            </Box>
                         ))}
                     </Box>
                 )}

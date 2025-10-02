@@ -1,4 +1,4 @@
-// src/pages/Login.js - SO CELA SIRINA
+// src/pages/Login.js - SO NOVATA SVETLA TEMA
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { authAPI } from '../services/api';
@@ -79,17 +79,16 @@ const Login = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#000000',
+            backgroundColor: '#fafafa',
             width: '100%'
         }}>
             <Box sx={{ width: '100%', maxWidth: '500px', px: 2 }}>
                 <Card
                     sx={{
                         width: '100%',
-                        bgcolor: '#1a1a1a',
-                        border: '2px solid #ffd700',
+                        border: '2px solid #ff7eb9',
                         borderRadius: '16px',
-                        boxShadow: '0 8px 32px rgba(255, 215, 0, 0.3)'
+                        boxShadow: '0 8px 32px rgba(255, 126, 185, 0.2)'
                     }}
                 >
                     <CardContent sx={{ p: 4 }}>
@@ -98,14 +97,14 @@ const Login = () => {
                             <FitnessCenter
                                 sx={{
                                     fontSize: 60,
-                                    color: '#ffd700',
+                                    color: '#ff7eb9',
                                     mb: 2
                                 }}
                             />
                             <Typography
                                 variant="h3"
                                 sx={{
-                                    color: '#ffd700',
+                                    color: '#ff7eb9',
                                     fontWeight: 'bold',
                                     mb: 1
                                 }}
@@ -115,7 +114,7 @@ const Login = () => {
                             <Typography
                                 variant="h6"
                                 sx={{
-                                    color: 'rgba(255,255,255,0.8)'
+                                    color: '#666666'
                                 }}
                             >
                                 Админ Панел
@@ -130,13 +129,13 @@ const Login = () => {
                             onClick={testBackendConnection}
                             sx={{
                                 mb: 3,
-                                color: '#4caf50',
-                                borderColor: '#4caf50',
+                                color: '#a5d8ff',
+                                borderColor: '#a5d8ff',
                                 py: 1.5,
                                 fontWeight: 'bold',
                                 '&:hover': {
-                                    borderColor: '#4caf50',
-                                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                                    borderColor: '#74c0fc',
+                                    backgroundColor: 'rgba(165, 216, 255, 0.1)',
                                 }
                             }}
                         >
@@ -151,7 +150,7 @@ const Login = () => {
                                     mb: 3,
                                     bgcolor: 'rgba(211, 47, 47, 0.1)',
                                     border: '1px solid #d32f2f',
-                                    color: '#ff6b6b'
+                                    color: '#d32f2f'
                                 }}
                             >
                                 <strong>Грешка:</strong> {error}
@@ -169,15 +168,7 @@ const Login = () => {
                                 required
                                 sx={{ mb: 3 }}
                                 InputProps={{
-                                    startAdornment: <Email sx={{ color: '#ffd700', mr: 1 }} />,
-                                    sx: {
-                                        color: 'white',
-                                        bgcolor: '#2a2a2a',
-                                        borderRadius: '8px'
-                                    }
-                                }}
-                                InputLabelProps={{
-                                    sx: { color: 'rgba(255,255,255,0.7)' }
+                                    startAdornment: <Email sx={{ color: '#ff7eb9', mr: 1 }} />,
                                 }}
                             />
 
@@ -190,15 +181,7 @@ const Login = () => {
                                 required
                                 sx={{ mb: 4 }}
                                 InputProps={{
-                                    startAdornment: <Lock sx={{ color: '#ffd700', mr: 1 }} />,
-                                    sx: {
-                                        color: 'white',
-                                        bgcolor: '#2a2a2a',
-                                        borderRadius: '8px'
-                                    }
-                                }}
-                                InputLabelProps={{
-                                    sx: { color: 'rgba(255,255,255,0.7)' }
+                                    startAdornment: <Lock sx={{ color: '#ff7eb9', mr: 1 }} />,
                                 }}
                             />
 
@@ -209,18 +192,18 @@ const Login = () => {
                                 disabled={loading}
                                 startIcon={loading ? <CircularProgress size={20} /> : <Lock />}
                                 sx={{
-                                    bgcolor: '#ffd700',
-                                    color: '#000',
+                                    bgcolor: '#ff7eb9',
+                                    color: '#fff',
                                     py: 1.5,
                                     fontWeight: 'bold',
                                     fontSize: '16px',
                                     borderRadius: '8px',
                                     '&:hover': {
-                                        bgcolor: '#ffed4e',
+                                        bgcolor: '#ff4a97',
                                         transform: 'translateY(-2px)',
                                     },
                                     '&:disabled': {
-                                        bgcolor: 'rgba(255, 215, 0, 0.5)',
+                                        bgcolor: 'rgba(255, 126, 185, 0.5)',
                                     },
                                     transition: 'all 0.2s ease'
                                 }}
@@ -234,7 +217,7 @@ const Login = () => {
                             <Typography
                                 variant="caption"
                                 sx={{
-                                    color: 'rgba(255,255,255,0.5)',
+                                    color: '#999999',
                                     display: 'block'
                                 }}
                             >
@@ -243,7 +226,7 @@ const Login = () => {
                             <Typography
                                 variant="caption"
                                 sx={{
-                                    color: 'rgba(255,255,255,0.4)',
+                                    color: '#cccccc',
                                     display: 'block',
                                     mt: 1
                                 }}

@@ -1,4 +1,4 @@
-// src/pages/Statistics.js - SO ADMIN HEADER
+// src/pages/Statistics.js - SO NOVATA SVETLA TEMA
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -10,46 +10,47 @@ import {
     CardContent
 } from '@mui/material';
 import { Analytics } from '@mui/icons-material';
-import AdminHeader from '../components/AdminHeader'; // DODADENO
+import AdminHeader from '../components/AdminHeader';
 
 const Statistics = () => {
     const navigate = useNavigate();
 
     return (
-        <Container sx={{ py: 4, bgcolor: '#0a0a0a', minHeight: '100vh' }}>
-            {/* ADMIN HEADER - PRVO VO KONTEJNEROT */}
+        <Container sx={{ py: 4, minHeight: '100vh' }}>
             <AdminHeader />
 
-            {/* Potoa ostanatiot kod */}
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-                <Analytics sx={{ color: '#2196f3', fontSize: 40, mr: 2 }} />
+                <Analytics sx={{ color: '#c8f0cc', fontSize: 40, mr: 2 }} />
                 <Box>
-                    <Typography variant="h4" sx={{ color: '#2196f3', mb: 1 }}>
-                        Статистики
+                    <Typography variant="h4" sx={{ color: '#c8f0cc', mb: 1, fontWeight: 'bold' }}>
+                        📊 Статистики
                     </Typography>
-                    <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                    <Typography variant="body1" sx={{ color: '#666666' }}>
                         Преглед на статистики и анализи
                     </Typography>
                 </Box>
             </Box>
 
             {/* Placeholder Content */}
-            <Card sx={{ bgcolor: '#1a1a1a', border: '2px solid #2196f3', p: 4, textAlign: 'center' }}>
+            <Card sx={{ border: '2px solid #c8f0cc', p: 4, textAlign: 'center' }}>
                 <CardContent>
-                    <Typography variant="h5" sx={{ color: '#2196f3', mb: 3 }}>
+                    <Typography variant="h5" sx={{ color: '#c8f0cc', mb: 3, fontWeight: 'bold' }}>
                         📊 Во развој
                     </Typography>
-                    <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', mb: 3 }}>
+                    <Typography variant="body1" sx={{ color: '#666666', mb: 3 }}>
                         Оваа функција моментално е во развој и ќе биде достапна наскоро.
                     </Typography>
                     <Button
                         variant="contained"
                         onClick={() => navigate('/')}
                         sx={{
-                            bgcolor: '#2196f3',
-                            color: '#000',
+                            bgcolor: '#c8f0cc',
+                            color: '#2b2b2b',
                             fontWeight: 'bold',
-                            px: 4
+                            px: 4,
+                            '&:hover': {
+                                bgcolor: '#a8e6af',
+                            }
                         }}
                     >
                         Назад кон Dashboard
