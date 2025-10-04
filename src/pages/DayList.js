@@ -1,8 +1,8 @@
-// src/pages/DayList.js - SO CELA SIRINA I POUBAV DIZAJN
+// src/pages/DayList.js - POPRAVEN BEZ DUPLI DIALOG
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Box, Typography, Button, Dialog, Snackbar, Alert
+    Box, Typography, Button, Snackbar, Alert
 } from '@mui/material';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
@@ -21,6 +21,8 @@ import SaveIcon from '@mui/icons-material/Save';
 
 const SortableDayWrapper = ({ day, onView, onEdit, onDelete }) => {
     const {
+        attributes,
+        listeners,
         setNodeRef,
         transform,
         transition,
@@ -32,7 +34,12 @@ const SortableDayWrapper = ({ day, onView, onEdit, onDelete }) => {
     };
 
     return (
-        <div ref={setNodeRef} style={style}>
+        <div
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+        >
             <SortableDay
                 day={day}
                 onView={onView}
@@ -114,11 +121,11 @@ const DayList = () => {
             if (dayData.id) {
                 const updatedDay = await dayAPI.admin.update(dayData.id, dataToSend);
                 setDays(prev => prev.map(day => day.id === dayData.id ? updatedDay : day));
-                showSnackbar('Денот е успешно променет');
+                showSnackbar('Денот е успешно променет 🎉');
             } else {
                 const newDay = await dayAPI.admin.create(dataToSend);
                 setDays(prev => [...prev, newDay]);
-                showSnackbar('Денот е успешно додаден');
+                showSnackbar('Денот е успешно додаден 🎉');
             }
             handleCloseDialog();
         } catch (err) {
@@ -128,11 +135,11 @@ const DayList = () => {
     };
 
     const handleDeleteDay = async (day) => {
-        if (window.confirm(`Дали сте сигурни дека сакате да го избришете денот "${day.title}"?`)) {
+        if (window.confirm(`Дали сте сигурни дека сакате да го избришете денот "${day.title || day.name}"?\nОваа акција е неповратна!`)) {
             try {
                 await dayAPI.admin.delete(day.id);
                 setDays(prev => prev.filter(d => d.id !== day.id));
-                showSnackbar('Денот е успешно избришан');
+                showSnackbar('Денот е успешно избришан 🗑️');
             } catch (err) {
                 console.error('Error deleting day:', err);
                 showSnackbar('Грешка при бришење на денот', 'error');
@@ -153,7 +160,7 @@ const DayList = () => {
         try {
             const dayIds = days.map(day => day.id);
             await dayAPI.admin.reorder(dayIds);
-            showSnackbar('Редоследот е зачуван!');
+            showSnackbar('Редоследот е зачуван! ✅');
         } catch (err) {
             console.error('Error saving order:', err);
             showSnackbar('Грешка при зачувување на редоследот', 'error');
@@ -162,12 +169,30 @@ const DayList = () => {
 
     if (loading) {
         return (
-            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%', backgroundColor: '#fafafa' }}>
                 <Box sx={{ px: 4 }}>
                     <AdminHeader />
                 </Box>
-                <Box sx={{ px: 4 }}>
-                    <Typography sx={{ color: '#ff7eb9' }}>Вчитување...</Typography>
+                <Box sx={{
+                    px: 4,
+                    textAlign: 'center',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '50vh'
+                }}>
+                    <Typography variant="h4" sx={{
+                        color: '#ff7eb9',
+                        fontWeight: 'bold',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 2
+                    }}>
+                        <Box sx={{ animation: 'pulse 1.5s ease-in-out infinite' }}>
+                            ⏳
+                        </Box>
+                        Вчитување на денови...
+                    </Typography>
                 </Box>
             </Box>
         );
@@ -175,18 +200,37 @@ const DayList = () => {
 
     return (
         <>
-            <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
+            <Box sx={{ py: 4, minHeight: '100vh', width: '100%', backgroundColor: '#fafafa' }}>
                 <Box sx={{ px: 4 }}>
                     <AdminHeader />
                 </Box>
 
                 <Box sx={{ px: 4 }}>
                     {/* Header */}
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-                        <Typography variant="h3" sx={{ color: '#ff7eb9', fontWeight: 'bold' }}>
-                            📅 Листа на Денови
-                        </Typography>
-                        <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        mb: 4,
+                        flexWrap: 'wrap',
+                        gap: 2
+                    }}>
+                        <Box>
+                            <Typography variant="h3" sx={{
+                                color: '#ff7eb9',
+                                fontWeight: 'bold',
+                                textShadow: '0 2px 4px rgba(255, 126, 185, 0.3)'
+                            }}>
+                                📅 Листа на Денови
+                            </Typography>
+                            <Typography variant="h6" sx={{
+                                color: '#666666',
+                                mt: 1
+                            }}>
+                                Управувајте со деновите и нивните видеа
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                             <Button
                                 variant="outlined"
                                 onClick={saveOrder}
@@ -197,10 +241,13 @@ const DayList = () => {
                                     fontWeight: 'bold',
                                     px: 3,
                                     py: 1.5,
+                                    borderRadius: '12px',
                                     '&:hover': {
                                         borderColor: '#74c0fc',
                                         backgroundColor: 'rgba(165, 216, 255, 0.1)',
-                                    }
+                                        transform: 'translateY(-2px)'
+                                    },
+                                    transition: 'all 0.3s ease'
                                 }}
                             >
                                 Зачувај редослед
@@ -215,11 +262,14 @@ const DayList = () => {
                                     fontWeight: 'bold',
                                     px: 3,
                                     py: 1.5,
+                                    borderRadius: '12px',
+                                    boxShadow: '0 4px 15px rgba(255, 126, 185, 0.3)',
                                     '&:hover': {
                                         bgcolor: '#ff4a97',
                                         transform: 'translateY(-2px)',
+                                        boxShadow: '0 6px 20px rgba(255, 126, 185, 0.4)',
                                     },
-                                    transition: 'all 0.2s ease'
+                                    transition: 'all 0.3s ease'
                                 }}
                             >
                                 Додај ден
@@ -234,12 +284,24 @@ const DayList = () => {
                             py: 12,
                             border: '2px dashed #ff7eb9',
                             borderRadius: '16px',
-                            backgroundColor: 'rgba(255, 126, 185, 0.05)'
+                            backgroundColor: 'rgba(255, 126, 185, 0.05)',
+                            backdropFilter: 'blur(10px)'
                         }}>
-                            <Typography variant="h4" sx={{ color: '#ff7eb9', mb: 2, fontWeight: 'bold' }}>
+                            <Typography variant="h4" sx={{
+                                color: '#ff7eb9',
+                                mb: 2,
+                                fontWeight: 'bold',
+                                textShadow: '0 2px 4px rgba(255, 126, 185, 0.3)'
+                            }}>
                                 🏋️‍♂️ Нема денови
                             </Typography>
-                            <Typography variant="h6" sx={{ color: '#666666', mb: 4 }}>
+                            <Typography variant="h6" sx={{
+                                color: '#666666',
+                                mb: 4,
+                                maxWidth: '500px',
+                                mx: 'auto',
+                                lineHeight: 1.6
+                            }}>
                                 Додајте прв ден за да започнете со вашата фитнес програма
                             </Typography>
                             <Button
@@ -252,10 +314,12 @@ const DayList = () => {
                                     fontSize: '18px',
                                     px: 4,
                                     py: 2,
+                                    borderRadius: '12px',
+                                    boxShadow: '0 4px 15px rgba(255, 126, 185, 0.3)',
                                     '&:hover': {
                                         bgcolor: '#ff4a97',
                                         transform: 'translateY(-3px)',
-                                        boxShadow: '0 8px 25px rgba(255, 126, 185, 0.3)',
+                                        boxShadow: '0 8px 25px rgba(255, 126, 185, 0.4)',
                                     },
                                     transition: 'all 0.3s ease'
                                 }}
@@ -272,14 +336,36 @@ const DayList = () => {
                                 mb: 3,
                                 p: 3,
                                 backgroundColor: 'rgba(255, 126, 185, 0.05)',
-                                borderRadius: '12px',
-                                border: '1px solid rgba(255, 126, 185, 0.2)'
+                                borderRadius: '16px',
+                                border: '1px solid rgba(255, 126, 185, 0.2)',
+                                backdropFilter: 'blur(10px)'
                             }}>
-                                <Typography variant="h5" sx={{ color: '#ff7eb9', fontWeight: 'bold' }}>
-                                    Вкупно денови: {days.length}
-                                </Typography>
-                                <Typography variant="body1" sx={{ color: '#666666' }}>
-                                    Влечете и спуштајте за да го промените редоследот
+                                <Box>
+                                    <Typography variant="h5" sx={{
+                                        color: '#ff7eb9',
+                                        fontWeight: 'bold',
+                                        mb: 1
+                                    }}>
+                                        📊 Вкупно денови: {days.length}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{
+                                        color: '#666666',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 1
+                                    }}>
+                                        🎯 Вкупно видеа: {days.reduce((total, day) => total + (day.videos?.length || 0), 0)}
+                                    </Typography>
+                                </Box>
+                                <Typography variant="body1" sx={{
+                                    color: '#666666',
+                                    backgroundColor: 'rgba(165, 216, 255, 0.1)',
+                                    px: 2,
+                                    py: 1,
+                                    borderRadius: '8px',
+                                    border: '1px solid rgba(165, 216, 255, 0.3)'
+                                }}>
+                                    👆 Влечете и спуштајте за да го промените редоследот
                                 </Typography>
                             </Box>
 
@@ -303,54 +389,94 @@ const DayList = () => {
                                 mt: 4,
                                 p: 3,
                                 backgroundColor: 'rgba(165, 216, 255, 0.05)',
-                                borderRadius: '12px',
+                                borderRadius: '16px',
                                 border: '1px solid rgba(165, 216, 255, 0.2)',
-                                textAlign: 'center'
+                                textAlign: 'center',
+                                backdropFilter: 'blur(10px)'
                             }}>
-                                <Typography variant="h6" sx={{ color: '#a5d8ff', mb: 1, fontWeight: 'bold' }}>
-                                    📊 Статистика
+                                <Typography variant="h6" sx={{
+                                    color: '#a5d8ff',
+                                    mb: 2,
+                                    fontWeight: 'bold',
+                                    textShadow: '0 2px 4px rgba(165, 216, 255, 0.3)'
+                                }}>
+                                    📈 Статистика за денови
                                 </Typography>
-                                <Typography variant="body2" sx={{ color: '#666666' }}>
-                                    Вкупно видеа: {days.reduce((total, day) => total + (day.videos?.length || 0), 0)} |
-                                    Просечно видеа по ден: {(days.reduce((total, day) => total + (day.videos?.length || 0), 0) / days.length).toFixed(1)}
-                                </Typography>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4, flexWrap: 'wrap' }}>
+                                    <Typography variant="body2" sx={{
+                                        color: '#666666',
+                                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                                        px: 2,
+                                        py: 1,
+                                        borderRadius: '8px',
+                                        border: '1px solid rgba(255, 126, 185, 0.2)'
+                                    }}>
+                                        📅 Вкупно денови: {days.length}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{
+                                        color: '#666666',
+                                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                                        px: 2,
+                                        py: 1,
+                                        borderRadius: '8px',
+                                        border: '1px solid rgba(255, 126, 185, 0.2)'
+                                    }}>
+                                        🎬 Вкупно видеа: {days.reduce((total, day) => total + (day.videos?.length || 0), 0)}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{
+                                        color: '#666666',
+                                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                                        px: 2,
+                                        py: 1,
+                                        borderRadius: '8px',
+                                        border: '1px solid rgba(255, 126, 185, 0.2)'
+                                    }}>
+                                        📊 Просечно видеа по ден: {(days.reduce((total, day) => total + (day.videos?.length || 0), 0) / days.length).toFixed(1)}
+                                    </Typography>
+                                </Box>
                             </Box>
                         </Box>
                     )}
                 </Box>
 
-                <Dialog
-                    open={addDayDialog}
-                    onClose={handleCloseDialog}
-                    maxWidth="md"
-                    fullWidth
-                    PaperProps={{
-                        sx: {
-                            borderRadius: '16px',
-                            boxShadow: '0 8px 32px rgba(255, 126, 185, 0.2)'
-                        }
-                    }}
-                >
+                {/* Day Form Dialog - OVA E SAMO AKO addDayDialog e true */}
+                {addDayDialog && (
                     <DayForm
                         initialData={selectedDay}
                         onSave={handleSaveDay}
                         onCancel={handleCloseDialog}
                     />
-                </Dialog>
+                )}
             </Box>
 
             <Snackbar
                 open={snackbar.open}
-                autoHideDuration={3000}
+                autoHideDuration={4000}
                 onClose={() => setSnackbar({ ...snackbar, open: false })}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
                 <Alert
                     severity={snackbar.severity}
                     onClose={() => setSnackbar({ ...snackbar, open: false })}
+                    sx={{
+                        borderRadius: '12px',
+                        fontWeight: 'bold',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                    }}
                 >
                     {snackbar.message}
                 </Alert>
             </Snackbar>
+
+            <style>
+                {`
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                    100% { transform: scale(1); }
+                }
+                `}
+            </style>
         </>
     );
 };

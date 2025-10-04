@@ -1,21 +1,23 @@
-// src/App.js - POPRAVEN IMPORT
+// src/App.js - POPRAVENO
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { gymTheme } from './styles/Theme'; // POPRAVEN IMPORT - Theme.js
+import { gymTheme } from './styles/Theme';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
-// Import na site komponenti
+// Import на сите компоненти
+import ProgramDays from './pages/ProgramDays';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import DayList from './pages/DayList';
+import ProgramList from './pages/ProgramList'; // 👈 ДОДАДЕН IMPORT
 import VideoList from './pages/VideoList';
 import Users from './pages/Users';
 import Statistics from './pages/Statistics';
 import SubscriptionPlans from './pages/SubscriptionPlans';
 
-// Protected Route komponenta
+// Protected Route компонента
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated, loading } = useAuth();
 
@@ -33,13 +35,13 @@ function App() {
             <AuthProvider>
                 <Router>
                     <Routes>
-                        {/* Login ruta */}
+                        {/* Login рута */}
                         <Route path="/login" element={<Login />} />
 
-                        {/* Subscription Plans (javna strana) */}
+                        {/* Subscription Plans (јавна страна) */}
                         <Route path="/subscription-plans" element={<SubscriptionPlans />} />
 
-                        {/* AdminDashboard (glavna strana) */}
+                        {/* AdminDashboard (главна страна) */}
                         <Route
                             path="/"
                             element={
@@ -49,12 +51,22 @@ function App() {
                             }
                         />
 
-                        {/* Admin AdminDashboard (lista na denovi) */}
+                        {/* Admin DayList (листа на денови) */}
                         <Route
                             path="/admin"
                             element={
                                 <ProtectedRoute>
                                     <DayList />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        {/* 👈 ДОДАДЕНА РУТА ЗА ПРОГРАМИ */}
+                        <Route
+                            path="/admin/programs"
+                            element={
+                                <ProtectedRoute>
+                                    <ProgramList />
                                 </ProtectedRoute>
                             }
                         />
@@ -85,6 +97,14 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <Statistics />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/admin/programs/:programId/days"
+                            element={
+                                <ProtectedRoute>
+                                    <ProgramDays />
                                 </ProtectedRoute>
                             }
                         />

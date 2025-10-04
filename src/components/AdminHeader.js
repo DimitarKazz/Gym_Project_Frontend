@@ -1,4 +1,4 @@
-// src/components/AdminHeader.js - SO NOVATA SVETLA TEMA
+// src/components/AdminHeader.js - POPRAVENO
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -9,7 +9,8 @@ import {
 import {
     Dashboard,
     FitnessCenter,
-    Logout
+    Logout,
+    Assignment // 👈 ДОДАДЕН IMPORT
 } from '@mui/icons-material';
 
 const AdminHeader = () => {
@@ -27,6 +28,10 @@ const AdminHeader = () => {
 
     const handleDenovi = () => {
         navigate('/admin');
+    };
+
+    const handleProgrami = () => {
+        navigate('/admin/programs'); // 👈 ДОДАДЕНА ФУНКЦИЈА
     };
 
     return (
@@ -58,6 +63,23 @@ const AdminHeader = () => {
                 }}
             >
                 Админ Панел
+            </Button>
+
+            <Button
+                variant="outlined"
+                startIcon={<Assignment />} // 👈 СМЕНЕТА ИКОНА
+                onClick={handleProgrami}
+                sx={{
+                    color: '#c8f0cc',
+                    borderColor: '#c8f0cc',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                        borderColor: '#a8e6af',
+                        backgroundColor: 'rgba(200, 240, 204, 0.1)',
+                    }
+                }}
+            >
+                Програми
             </Button>
 
             <Button
