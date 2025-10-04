@@ -1,4 +1,4 @@
-// src/pages/AdminDashboard.js - SO NOVATA SVETLA TEMA
+// src/pages/AdminDashboard.js - DODAVANJE NA PROGRAMI KOPCE
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -13,6 +13,7 @@ import {
     FitnessCenter,
     People,
     Analytics,
+    Assignment,
     ArrowForward
 } from '@mui/icons-material';
 import AdminHeader from '../components/AdminHeader';
@@ -23,27 +24,35 @@ const AdminDashboard = () => {
     const dashboardItems = [
         {
             id: 1,
-            title: 'Денови',
-            description: 'Управувај со денови и нивните видеа',
-            icon: <FitnessCenter sx={{ fontSize: 60, color: '#ff7eb9' }} />,
-            path: '/admin',
+            title: 'Програми',
+            description: 'Управувај со фитнес програми и денови',
+            icon: <Assignment sx={{ fontSize: 60, color: '#ff7eb9' }} />,
+            path: '/admin/programs',
             color: '#ff7eb9'
         },
         {
             id: 2,
-            title: 'Корисници',
-            description: 'Управувај со корисници и нивните претплати',
-            icon: <People sx={{ fontSize: 60, color: '#a5d8ff' }} />,
-            path: '/users',
+            title: 'Денови',
+            description: 'Управувај со денови и нивните видеа',
+            icon: <FitnessCenter sx={{ fontSize: 60, color: '#a5d8ff' }} />,
+            path: '/admin',
             color: '#a5d8ff'
         },
         {
             id: 3,
+            title: 'Корисници',
+            description: 'Управувај со корисници и нивните претплати',
+            icon: <People sx={{ fontSize: 60, color: '#c8f0cc' }} />,
+            path: '/users',
+            color: '#c8f0cc'
+        },
+        {
+            id: 4,
             title: 'Статистики',
             description: 'Преглед на статистики и анализи',
-            icon: <Analytics sx={{ fontSize: 60, color: '#c8f0cc' }} />,
+            icon: <Analytics sx={{ fontSize: 60, color: '#ffd166' }} />,
             path: '/statistics',
-            color: '#c8f0cc'
+            color: '#ffd166'
         }
     ];
 
@@ -71,7 +80,7 @@ const AdminDashboard = () => {
             <Box sx={{ px: 4 }}>
                 <Grid container spacing={4} justifyContent="center">
                     {dashboardItems.map((item) => (
-                        <Grid item xs={12} md={4} key={item.id}>
+                        <Grid item xs={12} md={3} key={item.id}>
                             <Card
                                 onClick={() => handleCardClick(item.path)}
                                 sx={{
@@ -174,7 +183,7 @@ const AdminDashboard = () => {
                                         endIcon={<ArrowForward />}
                                         sx={{
                                             bgcolor: item.color,
-                                            color: item.color === '#a5d8ff' ? '#2b2b2b' : '#fff',
+                                            color: item.color === '#a5d8ff' || item.color === '#ffd166' ? '#2b2b2b' : '#fff',
                                             fontWeight: 'bold',
                                             px: 4,
                                             py: 1.5,

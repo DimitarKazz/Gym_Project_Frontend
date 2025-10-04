@@ -4,26 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a81588f-ccfb-4ef5-90a7-20a4b7034fd7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/DayList.js" afterDir="false" />
+    <list default="true" id="5a81588f-ccfb-4ef5-90a7-20a4b7034fd7" name="Changes" comment=" 345r6ty7ui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AdminHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AdminHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/DayForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DayForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DayVideoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DayVideoList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SortableDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SortableDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SortableVideoItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SortableVideoItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/VideoForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/VideoPlayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoPlayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AdminDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/DayDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DayDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Statistics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/SubscriptionPlans.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SubscriptionPlans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/DayList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DayList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/VideoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/VideoList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/Theme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,20 +44,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/cpp/frontend_gym",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "terminal",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -80,8 +71,19 @@
       <workItem from="1759075114408" duration="15509000" />
       <workItem from="1759093643036" duration="2927000" />
       <workItem from="1759149813270" duration="39722000" />
-      <workItem from="1759497832709" duration="8409000" />
+      <workItem from="1759497832709" duration="17374000" />
+      <workItem from="1759571781487" duration="669000" />
+      <workItem from="1759600417914" duration="275000" />
+      <workItem from="1759616696358" duration="1782000" />
     </task>
+    <task id="LOCAL-00001" summary="Prepare backend: initial commit with all files">
+      <created>1759509222676</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1759509222676</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -97,5 +99,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Prepare backend: initial commit with all files" />
+    <MESSAGE value=" 345r6ty7ui" />
+    <option name="LAST_COMMIT_MESSAGE" value=" 345r6ty7ui" />
   </component>
 </project>

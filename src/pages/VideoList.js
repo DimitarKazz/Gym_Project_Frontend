@@ -1,4 +1,4 @@
-// src/pages/VideoList.js - SO NOVATA SVETLA TEMA SO KOPCE NAZAD KON DENOVI
+// src/pages/VideoList.js - POPRAVENO SO PRAVILNA NAVIGACIJA
 import React, { useState, useEffect } from 'react';
 import {
     Box,
@@ -24,12 +24,13 @@ import AdminHeader from '../components/AdminHeader';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import AddIcon from '@mui/icons-material/Add';
 import SaveIcon from '@mui/icons-material/Save';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const VideoList = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const dayId = searchParams.get('day');
+    const programId = searchParams.get('program');
 
     const [videos, setVideos] = useState([]);
     const [day, setDay] = useState(null);
@@ -80,6 +81,17 @@ const VideoList = () => {
 
     const showSnackbar = (message, severity = 'success') => {
         setSnackbar({ open: true, message, severity });
+    };
+
+    // 👈 PRAVILNA FUNKCIJA ZA NAZAD KON DENOVI
+    const handleBackToProgramDays = () => {
+        if (programId) {
+            // Vrakja kon http://localhost:3000/admin/programs/1/days
+            navigate(`/admin/programs/${programId}/days`);
+        } else {
+            // Ako nema programId, vrati se kon admin panel
+            navigate('/admin');
+        }
     };
 
     const handleDragEnd = async (event) => {
@@ -194,10 +206,6 @@ const VideoList = () => {
         }
     };
 
-    const handleBackToDays = () => {
-        navigate('/admin');
-    };
-
     if (selectedVideo) {
         return (
             <Box sx={{ py: 4, minHeight: '100vh', width: '100%' }}>
@@ -281,12 +289,12 @@ const VideoList = () => {
                     {/* Header so kopcinja */}
                     <Box sx={{ mb: 4 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                            {/* Left side - Back to Days button and Title */}
+                            {/* Left side - Back to Program Days button and Title */}
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                                 <Button
                                     variant="outlined"
-                                    startIcon={<FitnessCenterIcon />}
-                                    onClick={handleBackToDays}
+                                    startIcon={<ArrowBackIcon />}
+                                    onClick={handleBackToProgramDays}
                                     sx={{
                                         color: '#a5d8ff',
                                         borderColor: '#a5d8ff',
@@ -311,7 +319,12 @@ const VideoList = () => {
                                     </Typography>
                                     {day && (
                                         <Typography variant="h5" sx={{ color: '#ff4a97', mt: 1 }}>
-                                            Ден: {day.title}
+                                            📅 Ден: {day.title}
+                                            {programId && (
+                                                <Typography variant="body1" sx={{ color: '#a5d8ff', fontSize: '0.9rem' }}>
+                                                    Програма ID: {programId}
+                                                </Typography>
+                                            )}
                                         </Typography>
                                     )}
                                 </Box>
@@ -382,8 +395,8 @@ const VideoList = () => {
                                 </Button>
                                 <Button
                                     variant="outlined"
-                                    onClick={handleBackToDays}
-                                    startIcon={<FitnessCenterIcon />}
+                                    onClick={handleBackToProgramDays}
+                                    startIcon={<ArrowBackIcon />}
                                     sx={{
                                         color: '#a5d8ff',
                                         borderColor: '#a5d8ff',
@@ -418,8 +431,8 @@ const VideoList = () => {
                                     </Button>
                                     <Button
                                         variant="outlined"
-                                        onClick={handleBackToDays}
-                                        startIcon={<FitnessCenterIcon />}
+                                        onClick={handleBackToProgramDays}
+                                        startIcon={<ArrowBackIcon />}
                                         sx={{
                                             color: '#a5d8ff',
                                             borderColor: '#a5d8ff',
@@ -429,7 +442,7 @@ const VideoList = () => {
                                             }
                                         }}
                                     >
-                                        Кон Денови
+                                        Назад кон Денови
                                     </Button>
                                 </Box>
                             </Box>
@@ -450,12 +463,12 @@ const VideoList = () => {
                                 </SortableContext>
                             </DndContext>
 
-                            {/* Bottom Back to Days button */}
+                            {/* Bottom Back to Program Days button */}
                             <Box sx={{ textAlign: 'center', mt: 4 }}>
                                 <Button
                                     variant="contained"
-                                    onClick={handleBackToDays}
-                                    startIcon={<FitnessCenterIcon />}
+                                    onClick={handleBackToProgramDays}
+                                    startIcon={<ArrowBackIcon />}
                                     sx={{
                                         bgcolor: '#a5d8ff',
                                         color: '#2b2b2b',
